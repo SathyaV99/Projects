@@ -1,4 +1,4 @@
-**OBJECTIVE** 
+**SUMMARY** 
 
 The main objective of the project is to predict the class as "Normal", "Type H", "Type S" from the provided biomechanical features. In this project, data was cleaned, explored, analysed, visualized, pre processed, trained, tested and tuned. 
 
