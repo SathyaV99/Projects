@@ -82,7 +82,9 @@ d) metrics is the distance parameter the model uses, the distance 'Minkowski' se
 
 • This model has been tuned with all the features, hyperparameters, and libraries available.
 
-Reason why this is the best hypertuned model for KNN Classifier
+**Conclusion**
+
+**Reason why this is the best hypertuned model for KNN Classifier**
 
 1) 1% increase in accuracy
 
