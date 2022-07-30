@@ -1,8 +1,12 @@
+**OBJECTIVE** 
+
 The main objective of the project is to predict the class as "Normal", "Type H", "Type S" from the provided biomechanical features. In this project, data was cleaned, explored, analysed, visualized, pre processed, trained, tested and tuned. 
 
 Refer to "Project 3.ipynb" for all the details, the inference and the conclusions are also detailed within the notebook.
 
 KNN Classifier was used for this project, it was found that there was slight imbalance in the dataset. 
+
+**CLASS IMBALANCE**
 
 ![image](https://user-images.githubusercontent.com/88423149/181877501-a0a1687a-8c14-4ccb-bb76-da6eaf550ef0.png)
 
@@ -18,8 +22,7 @@ Extreme ---> <1% of the data set
 
 In this case, the class attribute is mildly imbalanced at 33% (between 20-40%) but it is not required to be balanced as it is viable for the dataset.
 
-The model was trained, tested and tuned using "GridSearchCV". The final results are as follows:
-
+**The model was trained, tested and tuned using "GridSearchCV". The final results are as follows:**
 
 • The model selection is critically chosen based on Precision,Recall, f1-score, AUC values, because when Hypertuning KNN which is a classification model, we dont rely on accuracy.
 
