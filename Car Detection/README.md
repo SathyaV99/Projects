@@ -223,7 +223,7 @@ Classes/Labels and Bounding box mapped to Image
 ![image](https://user-images.githubusercontent.com/88423149/185035790-64646903-5493-4ba5-9875-dfc117f6292f.png)
 189 Unique Cars from the Dataset with Bounding box
 
-**8. Model Training and Testing**
+**8. CNN Model Training and Testing**
 In Model building, training and testing, the CNN Model architecture was built, the CNN model was trained with images and labels/classes (‘carname’,’type’,’year’,’brand’). 
 
 The CNN model designed has 22 layers in total: 4 Conv2D layers, 4 max pooling layers, 6 batch normalization layers, 4 dropout layers, 3 dense layers and 1 flatten layer. The final dense layer for each CNN differs as the following feature have different number of classes: Year (16 classes), Type (8 classes), Brand (49 classes), Car names (189 classes).
@@ -277,14 +277,118 @@ Loss	15.07%	15.3%
 The model was tested, where Label/classes were predicted for an image. The following were the images for which the prediction was carried out, the resolution being 60x60 is why the image is unclear.
 
 ![image](https://user-images.githubusercontent.com/88423149/185036089-5168ef9a-e748-4298-be49-a055d0a3cfdb.png)
-
 ![image](https://user-images.githubusercontent.com/88423149/185036101-4935eb43-c7ce-4a4e-89f4-204e904b3584.png)
-
 ![image](https://user-images.githubusercontent.com/88423149/185036106-f00d154a-4249-435d-9608-bd3df0a7a1ca.png)
-
 ![image](https://user-images.githubusercontent.com/88423149/185036109-d5892fed-e94e-4a7e-8152-5a00a46792ef.png)
 
+•	The Labels were incorrectly predicted; hence the model is not viable for production.
 
+**9. Results and Conclusion (CNN Model)**
 
+•	From the above model related observations, the reason for low accuracy on ‘Car names’ dataset is due to insufficient class values in the dataset. As Car names dataset has 189 unique classes and had limited number of duplicate instances, resulting in data being underfit for modelling purpose.
 
+•	The main reason why the model is performing poorly for all the classes is because the input resolution is only 60x60 which gives a very unclear image, that affects the model prediction capability.
 
+•	The models were pickled and then “Brand”, “Year” and “Type” CNN models were retrained with weights loaded on batch size of 500 over 40 epochs. However, the results were no different. 
+
+•	To improve the model performance, the final step that was taken was to increase the resolution of the model to 500x500. However, the model needed to allocate 22.8 gb of memory for this model, but due to the unavailability, it displayed an error message. 
+
+![image](https://user-images.githubusercontent.com/88423149/185036218-b0743060-e2f9-46e0-b296-beedd679f7e4.png)
+
+•	The only viable solution is to use pre trained models for training the dataset, which will make it easier in prediction process and also taking images as a batch for modelling purpose.
+
+**10. Detectron2 Introduction:**
+
+•	 Detectron2 is a tool that uses the Pytorch framework that was created by Facebook AI research group and has state of the art detection and efficiency in predicting images. It uses different object related algorithms (eg: Mask RCNN, RetinaNet, Fast RCNN etc.) which are embedded to accurately classify objects. It can be combined with the Car Detection dataset for much better prediction capabilities.
+
+•	On that note, we had used a custom dataset for which it was trained using Faster RCNN and RetinaNet, the model had detected, labelled, and put bounding boxes over the objects in the images. From the Detectron2 tool some of the pre trained model weights such as “COCO-Detection/faster_rcnn_X_101_32x8d_FPN_3x.yaml” for Faster RCNN and "COCO-Detection/retinanet_R_101_FPN_3x.yaml” for RetinaNet were used.
+
+•	The following are the images with which it had performed object detection from model weights alone. 
+
+![image](https://user-images.githubusercontent.com/88423149/185036260-873568e6-355b-4a0c-acf1-b21f2da8169c.png)
+
+![image](https://user-images.githubusercontent.com/88423149/185036268-efab69c1-5408-4f95-bfae-2a7fbb0b54fc.png)
+Detectron2 – RetinaNet object detection using pretrained weights
+
+![image](https://user-images.githubusercontent.com/88423149/185036316-1d0a42d6-d30b-473d-96b5-d1576ad99a14.png)
+
+![image](https://user-images.githubusercontent.com/88423149/185036326-23973909-f334-4d7e-9b95-9baf914cc540.png)
+Detectron2 – Faster RCNN object detection using pretrained weights
+
+•	From the above images, we can understand that the Faset RCNN gave results which are more useful to Car Detection dataset as it only gave concise predictions, although RetinaNet gave lots of predictions, it gave unnecessary predictions. 
+
+•	Hence, from the Detectron2 tool, for Car Detection project, for the next milestone, the Faster RCNN can be utilized and tested for Car Detection dataset. Keras tuner can be used for Hyperparameter tuning of the dataset.
+
+**11. Detectron2 Preprocessing**
+•	Detectron2 model zoo was tested for its model weights and pre trained bounding box and performance for FasterRCNN.
+
+•	From the testing, a dataset with “Car” and “Truck” classes were considered, the IOU accuracy was averaging around 96%, which is high, this means that, the model has accurate detection in production environment as well using test data.
+
+•	The Detectron2 models require a class ID column which was created separately for the datasets.
+
+•	The main class used for the dataset is the “Type” feature, which is the only feature which can be accurate predicted, and it is due to it only having 8 classes. Hence, better learning for the model.
+
+•	The annotations for the Detectron2 model should be created in COCO format, which is like JSON that is in a dictionary format. The template for the Detectron2 dataset is given in this guideline https://detectron2.readthedocs.io/en/latest/tutorials/datasets.html.
+
+![image](https://user-images.githubusercontent.com/88423149/185036360-1dfd9382-69c2-4c22-8756-d0f8b6e9f947.png)
+Detectron2 dataset In COCO format (in dictionary)
+
+•	After the annotations, filename, imageid, height, width, bbox_mode, category_id, and segmentation are defined for the dataset in COCO format, the detectron2 classes should be mapped to the annotations.
+
+•	Using, DatasetCatalog, the model classes are mapped to the annotations as objects within the Detectron2 tool.
+
+![image](https://user-images.githubusercontent.com/88423149/185036405-0b0b76c3-5cf8-4926-b3e2-6d3316d545fe.png)
+Mapping Classes to Annotations using Detectron2 function
+
+•	Images are bound with boxes and class via Detectron2 tool.
+
+![image](https://user-images.githubusercontent.com/88423149/185036449-ca145c91-5e28-45c7-a18c-aa7945ad4203.png)
+Image with bounding boxes and classes using Detectron2 tool
+
+**12. Detectron2 Model Training**
+•	 The Detectron2 model was trained using Faster RCNN .yaml file from COCO-Detection. The pre trained weights reduce the model training time and memory requirement. Hence, this is ideal for Car Detection dataset, as it has over 8000+ images each for train and test.
+
+![image](https://user-images.githubusercontent.com/88423149/185036475-d25c8ff7-f2ea-484e-a219-706dc1d30788.png)
+Detectron2 Custom Model Training with pre trained weights
+
+![image](https://user-images.githubusercontent.com/88423149/185036486-5e1701d3-b6bc-4517-a18a-5e25859b2841.png)
+Detectron2 Custom Model Training classes
+
+**13. Detectron2 Prediction/Evaluation**
+•	The Faster RCNN pre trained model from Detectron2 tool was predicted using model zoo weights with custom classes. The results are as follows:
+
+![image](https://user-images.githubusercontent.com/88423149/185036507-50c7c5aa-efcd-4f30-8e13-af5980ea8444.png)
+Detectron2 Custom FasterRCNN Model Prediction
+
+•	The model was then evaluated using COCOEvaluator which is an inbuilt function from Detectron2. 
+
+![image](https://user-images.githubusercontent.com/88423149/185036546-27dd4331-59b1-499a-9de0-b7bc5da78cdc.png)
+Detectron2 Custom FasterRCNN Model Evaluation
+
+•	From the evaluation metrics, we can tell that the Average precision and Recall is very low. This is due to the usage of the model zoo weights on the model
+
+•	There was a limitation with the model prediction, where the OUTPUT directory with “model_final.pth” file, which has the weights of the trained model was not displaying weights. Although, this was working in Colabs. As this model was run in Jupyter notebook – GPU environment.  There seems to be some unknown issue.
+
+•	However, the model weights from model zoo were slightly accurate. Hence, we’re considering this and proceeding with this, as the final model used in production.
+
+•	The model was also checked with RetinaNet and Masked RCNN pre trained model from model zoo of Detectron2 tool. The predicted results are as follows:
+
+![image](https://user-images.githubusercontent.com/88423149/185036559-5a032aba-0081-434e-8fa2-a7ebe87292a9.png)
+Detectron2 Custom MaskedRCNN Prediction
+
+![image](https://user-images.githubusercontent.com/88423149/185036571-b8d1ff70-4189-4034-9408-19219c5c77ec.png)
+Detectron2 Custom RetinaNet Prediction
+
+•	Out of RetinaNet, Masked RCNN and Faster RCNN. The Faster RCNN had the best result, it however didn’t perform object masking, but it had better IOU value overall. Hence, the Faster RCNN model will be deployed into Streamlit API in local environment.
+
+14. Streamlit Model Deployment
+•	The FasterRCNN model is deployed into Streamlit GUI API for an interactive model prediction. 
+
+•	The custom model is stored as objectDetection.py in the local directory.
+
+•	The streamlit app is stored as detectron2_app.py in the local directory.
+
+The files are attached for reference, the code is also Hashed in the notebook.
+
+![image](https://user-images.githubusercontent.com/88423149/185036663-c4be91b6-99b5-44ba-ab9d-fdc487823ce0.png)
+Detectron2 Model Prediction in Streamlit
