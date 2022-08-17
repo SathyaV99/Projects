@@ -390,6 +390,6 @@ The files are attached for reference, the code is also Hashed in the notebook.
 ![image](https://user-images.githubusercontent.com/88423149/185036663-c4be91b6-99b5-44ba-ab9d-fdc487823ce0.png)
 Detectron2 Model Prediction in Streamlit
 
-The Faster RCNN model on rendering a Video 
+**The Faster RCNN model on rendering a Video **
 
 https://user-images.githubusercontent.com/88423149/185037267-c0bca9e2-f93c-4391-b75f-69ba54173a24.mp4
