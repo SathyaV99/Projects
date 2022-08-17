@@ -1,4 +1,4 @@
-<center>**Car Detection Project**</center>
+**Car Detection Project**
 
 **Contents**
 
