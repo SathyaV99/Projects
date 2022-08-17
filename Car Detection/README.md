@@ -1,13 +1,5 @@
 **Car Detection Project**
 
-https://user-images.githubusercontent.com/88423149/185036934-8acef6e4-ac92-4450-ad6e-9c635f5ce30e.mp4
-
-
-
-
-![image](https://user-images.githubusercontent.com/88423149/184920574-8690d296-de57-43fa-af12-cadce0a4f0bc.png)
-
-
 **Contents**
 
 1.	Introduction
@@ -397,3 +389,7 @@ The files are attached for reference, the code is also Hashed in the notebook.
 
 ![image](https://user-images.githubusercontent.com/88423149/185036663-c4be91b6-99b5-44ba-ab9d-fdc487823ce0.png)
 Detectron2 Model Prediction in Streamlit
+
+The Faster RCNN model on rendering a Video 
+
+https://user-images.githubusercontent.com/88423149/185037267-c0bca9e2-f93c-4391-b75f-69ba54173a24.mp4
