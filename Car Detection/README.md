@@ -157,5 +157,134 @@ xii.	In Multivariate Analysis, the Tree Map shows a hierarchical distribution of
 ![image](https://user-images.githubusercontent.com/88423149/184921604-91112287-6962-464e-9a82-08bb2ff45876.png)
 GUI interactive Tree Map in hierarchical order of Car Type > Year > Model
 
+xiii.	In the Tree map, the “Sedan” Car type has Cars from 1993, 1994, 2001, 2007, 2008, 2009, 2010, 2011, 2012.
 
-        
+ ![image](https://user-images.githubusercontent.com/88423149/185035442-e48e9729-a492-4019-9568-d95719a4c784.png)
+Tree Map of Sedan with Year and Brand
+
+xiv.	In the Tree map, the “SUV” Car type has Cars from 2000, 2007, 2008, 2009, 2010, 2011, 2012.
+
+ ![image](https://user-images.githubusercontent.com/88423149/185035500-801b9d31-ac37-4dd6-912d-171c30502de7.png)
+Tree Map of SUV with Year and Brand
+
+xv.	In the Tree map, the “Convertible” Car type has Cars from 1993, 2007, 2008, 2009, 2010, 2012.
+  ![image](https://user-images.githubusercontent.com/88423149/185035520-aff0ac90-546f-4d87-afe2-6139fcb79309.png)
+Tree Map of Convertible with Year and Brand
+
+xvi.	In the Tree map, the “Cab” Car type has Cars from 2007, 2009, 2010, 2011, 2012.
+        ![image](https://user-images.githubusercontent.com/88423149/185035541-d57e1531-158e-4207-afa5-a16864cd594d.png)
+Tree Map of Cab with Year and Brand
+
+xvii.	In the Tree map, the “Coupe” Car type has Cars from 1998, 1999, 2001, 2006, ,2007, 2008 , 2009 , 2012.
+![image](https://user-images.githubusercontent.com/88423149/185035564-1eb8f641-06ac-4b82-b25d-bc211b117efd.png)
+Tree Map of Coupe with Year and Brand
+
+xviii.	In the Tree map, the “Hatchback” Car type has Cars from 1991, 1998, 2011, 2012.
+![image](https://user-images.githubusercontent.com/88423149/185035579-abeaf587-4cc2-4890-838a-eb2d647d65d9.png)
+Tree Map of Hatchback with Year and Brand
+
+xix.	In the Tree map, the “Van” Car type has Cars from 1997, 2007, 2009, 2012.
+![image](https://user-images.githubusercontent.com/88423149/185035604-746f0a10-c2ae-4b80-ab9a-1e75fc3a92c7.png)
+Tree Map of Van with Year and Brand
+
+xx.	In the Tree map, the “Wagon” Car type has Cars from 1994, 2002, 2007, 2008, 2012.
+![image](https://user-images.githubusercontent.com/88423149/185035619-4c1b8fe4-90fe-47ad-a3ae-c67ac0926146.png)
+
+**7. Data Preprocessing**
+In Data Preprocessing, the two major activities performed are: 
+
+i)	Mapping Train and Test Images to Classes,
+ii)	Mapping Train and Test Images to Annotations
+iii)	Displaying Images with Bounding box from the annotations. 
+
+However, as part of preprocessing, the Train and Test images and labels were converted into arrays. Columns “Type”, “Year”, “Brand”, “Car name” are used as the labels/classes for images.
+
+ For Better understanding of the dataset, the Train and Test dataset’s duplicates were removed and a dataset with unique values was created. The following image is from the unique car dataset, it has the list of all 189 unique cars in the dataset.
+![image](https://user-images.githubusercontent.com/88423149/185035643-dfe86c79-049a-4b9d-b6ca-a6a23da07db6.png)
+
+**Mapping Train and Test Images to Classes:**
+
+The Image and Label are mapped to each other via Index since the images and labels were extracted from file directory. It is already mapped. The image and label are converted into an array before displaying the images.
+
+![image](https://user-images.githubusercontent.com/88423149/185035713-3bb6bb36-3046-4fa8-9f47-c34e76b9f06b.png)
+Classes/Labels mapped to Image
+
+**Mapping Train and Test Images to Annotations**
+
+The Image and Annotations are mapped to each other via Index since the images and labels were extracted from file directory. It is already mapped. The annotations have bounding box coordinates X1, Y1, X2,Y2. These coordinates are mapped into a rectangular box by calculating the width and height. This is the formula for Width = X2 – X1 and Height = Y2 – Y1. 
+
+**Displaying Images with Bounding box from the annotations. **
+
+The image mapping to bounding box is displayed, the bounding box is retrieved using “patches.Rectangle” function. The following are the images with Bounding box:
+![image](https://user-images.githubusercontent.com/88423149/185035776-a748f2a0-834f-4254-9e4b-4552c05b561a.png)
+![image](https://user-images.githubusercontent.com/88423149/185035783-c59ea9fd-d890-4368-b628-9a256aacff93.png)
+Classes/Labels and Bounding box mapped to Image
+
+![image](https://user-images.githubusercontent.com/88423149/185035790-64646903-5493-4ba5-9875-dfc117f6292f.png)
+189 Unique Cars from the Dataset with Bounding box
+
+**8. Model Training and Testing**
+In Model building, training and testing, the CNN Model architecture was built, the CNN model was trained with images and labels/classes (‘carname’,’type’,’year’,’brand’). 
+
+The CNN model designed has 22 layers in total: 4 Conv2D layers, 4 max pooling layers, 6 batch normalization layers, 4 dropout layers, 3 dense layers and 1 flatten layer. The final dense layer for each CNN differs as the following feature have different number of classes: Year (16 classes), Type (8 classes), Brand (49 classes), Car names (189 classes).
+
+![image](https://user-images.githubusercontent.com/88423149/185035851-ac823c7b-9bbd-4025-9964-a0f2ddbfbd84.png)
+CNN architecture for “car names” class
+
+Data Augmentation is performed using Image data generator to reduce overfitting of images. After which, the models were fit with data for model training.
+
+For the first CNN model, which had “Car names” as the class and images as feature. The following are the results from the training.	
+![image](https://user-images.githubusercontent.com/88423149/185035890-c9a180a8-270d-4485-bd11-8df9d9ee71c7.png)
+![image](https://user-images.githubusercontent.com/88423149/185035899-2c3c69b2-a72b-4ae3-981e-5196983b40fe.png)
+
+i.	This is the accuracy and loss for batch size of 500 over 30 epochs
+
+#	Train	Validation
+Accuracy 6.8%	3.8%
+Loss	45.7%	51.3%
+
+ii.	For the Second CNN model, which had “Brand” as the class and images as feature. The following are the results from the training
+![image](https://user-images.githubusercontent.com/88423149/185035933-b1b9318c-88bd-4ce9-93ec-60fc1f02d46a.png)
+![image](https://user-images.githubusercontent.com/88423149/185035938-cc152f3a-cfec-40ea-a47b-91da5de75cdc.png)
+
+This is the accuracy and loss for batch size of 500 over 30 epochs
+
+#	Train	Validation
+Accuracy 13.7%	11.0%
+Loss	31.7%	33.3%
+
+iii.	For the Third CNN model, which had “Type” as the class and images as feature. The following are the results from the training. 
+
+![image](https://user-images.githubusercontent.com/88423149/185035983-91711038-f7b8-4c75-bebb-721b026abaac.png)
+![image](https://user-images.githubusercontent.com/88423149/185035991-5155fb15-6fc8-47ff-9092-105f30f1209d.png)
+This is the accuracy and loss for batch size of 500 over 30 epochs
+
+#	Train	Validation
+Accuracy 31.04%	30.6%
+Loss	18.6%	18.8%
+
+iv.	For the Fourth CNN model, which had “Year” as the class and images as feature. The following are the results from the training.
+
+![image](https://user-images.githubusercontent.com/88423149/185036034-d36b55bb-b1bf-41db-8712-c39602a674d1.png)
+![image](https://user-images.githubusercontent.com/88423149/185036041-690614b7-9248-42af-83cd-4b13c929406d.png)
+
+This is the accuracy and loss for batch size of 500 over 30 epochs
+
+#	Train	Validation
+Accuracy 59.16%	59.10%
+Loss	15.07%	15.3%
+
+The model was tested, where Label/classes were predicted for an image. The following were the images for which the prediction was carried out, the resolution being 60x60 is why the image is unclear.
+
+![image](https://user-images.githubusercontent.com/88423149/185036089-5168ef9a-e748-4298-be49-a055d0a3cfdb.png)
+
+![image](https://user-images.githubusercontent.com/88423149/185036101-4935eb43-c7ce-4a4e-89f4-204e904b3584.png)
+
+![image](https://user-images.githubusercontent.com/88423149/185036106-f00d154a-4249-435d-9608-bd3df0a7a1ca.png)
+
+![image](https://user-images.githubusercontent.com/88423149/185036109-d5892fed-e94e-4a7e-8152-5a00a46792ef.png)
+
+
+
+
+
