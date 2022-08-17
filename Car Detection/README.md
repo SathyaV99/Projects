@@ -16,6 +16,7 @@
 12.	Detectron2 Model Training
 13.	Detectron2 Prediction and Evaluation
 14.	Streamlit local host - Model deployment into GUI API
+15.	Faster RCNN model on a video
 
 **1. Introduction**
 
